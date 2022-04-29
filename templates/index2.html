@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Resume - Start Bootstrap Theme</title>
+        <style>
+            video { max-width: 80%; display: block; margin: 20px auto; }
+        </style>
+    </head>
+    <body id="page-top">
+        <div>
+            <h3> 비디오 리스트 </h3>
+            <h3>{{ment}}</h3>
+        </div>
+
+        <div class="resume-section-content">
+            <h2 class="mb-5">VIDEO</h2>
+                <video style="width: 640px; height: 480px;" autoplay controls id="test_video" > 
+                    <source src="">
+                </video>
+        </div>
+        
+        <script>
+            var video_list = {{video_list|tojson}};
+            console.log(video_list[0])
+            
+            var video_count = 0;
+            var video_id = document.getElementById('test_video');
+            var first_video = video_list[0];
+            var object_src = 'https://kr.object.ncloudstorage.com/static-site-test-bucket/';
+            
+            video_id.src = object_src + first_video;
+            
+            video_id.onended = function(){
+                ++video_count;
+                if(video_count < video_list.length){
+                    video_id.src = object_src + video_list[video_count];
+                }
+            }
+        </script>
+        
+        
+        <!-- Bootstrap core JS-->
+        <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>-->
+        <!-- CSS -->
+        <!--<link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">-->
+        <!-- JS -->
+<!--         <script src="{{ url_for('static', filename='js/scripts.js') }}" > </script> -->
+    </body>
+</html>
+
